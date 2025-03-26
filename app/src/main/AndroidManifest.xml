@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,11 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ZdrowiePP"
-        tools:targetApi="31">
+        android:theme="@style/Theme.ZdrowiePP">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" /> <!-- Dodano exported="true" -->
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -24,5 +29,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
