@@ -27,4 +27,3 @@ play-services-ads-v2260 = { module = "com.google.android.gms:play-services-ads",
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-

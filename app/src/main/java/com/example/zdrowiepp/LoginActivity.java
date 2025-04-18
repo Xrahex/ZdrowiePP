@@ -1,6 +1,7 @@
 package com.example.zdrowiepp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +10,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import android.content.SharedPreferences;
+
+
 import com.google.android.gms.ads.*;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
     private InterstitialAd mInterstitialAd;
     private AdView adView;
@@ -34,6 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         setupClickListeners();
     }
 
+    /*
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("theme_prefs", MODE_PRIVATE);
+        int mode = prefs.getInt("app_theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        AppCompatDelegate.setDefaultNightMode(mode);
+
+        super.attachBaseContext(newBase);
+    }
+*/
     private void setupClickListeners() {
         btnLogin.setOnClickListener(view -> loginUser());
         btnRegister.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
@@ -60,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
             if (dbHelper != null && dbHelper.checkUser(userEmail, userPassword)) {
                 Toast.makeText(LoginActivity.this, "Logowanie udane!", Toast.LENGTH_SHORT).show();
                 showInterstitialAd();
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(LoginActivity.this, "Nieprawidłowe dane!", Toast.LENGTH_SHORT).show();
             }
