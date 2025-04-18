@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ZdrowiePP</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="first_fragment_label">Pierwszy fragment</string>
+    <string name="second_fragment_label">Drugi fragement</string>
+    <string name="next">Nastepny</string>
+    <string name="previous">Poprzedni</string>
+    <string name="welcome_message">Witaj!</string>
+    <string name="login_title">Logowanie</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Hasło</string>
+    <string name="login_button">Zaloguj się</string>
+    <string name="register_prompt">Nie masz konta? Zarejestruj się</string>
+    <string name="forgot_password">Zapomniałeś hasła?</string>
+    <string name="register_title">Rejestracja</string>
+    <string name="register_button">Zarejestruj się</string>
+    <string name="back_to_login">Masz już konto? Zaloguj się</string>
+    <string name="app_theme">Motyw aplikacji</string>
+    <string name="dark_mode">Tryb ciemny</string>
+    <string name="save_changes">Zapisz zmiany</string>
+
+    <string-array name="languages">
+        <item>Polski</item>
+        <item>Angielski</item>
+    </string-array>
+</resources>

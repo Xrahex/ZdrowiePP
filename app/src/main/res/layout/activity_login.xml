@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logowanie"
+        android:text="@string/login_title"
         android:textSize="24sp"
         android:gravity="center"
         android:paddingBottom="16dp" />
@@ -18,33 +18,33 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email_hint"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hasło"
+        android:hint="@string/password_hint"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zaloguj się" />
+        android:text="@string/login_button" />
 
     <Button
         android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nie masz konta? Zarejestruj się" />
+        android:text="@string/register_prompt" />
 
     <Button
         android:id="@+id/btn_forgot_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zapomniałeś hasła?" />
+        android:text="@string/forgot_password" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -54,4 +54,3 @@
         app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
 </LinearLayout>
-
