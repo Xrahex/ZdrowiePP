@@ -3,6 +3,8 @@ package com.example.zdrowiepp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -11,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.content.SharedPreferences;
 
 
@@ -73,10 +78,29 @@ public class LoginActivity extends BaseActivity {
             }
 
             if (dbHelper != null && dbHelper.checkUser(userEmail, userPassword)) {
-                Toast.makeText(LoginActivity.this, "Logowanie udane!", Toast.LENGTH_SHORT).show();
-                showInterstitialAd();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
+                int loggedInUserId = dbHelper.getUserId(userEmail);
+
+                if (loggedInUserId != -1) {
+                    MyApp.saveUserId(getApplicationContext(), loggedInUserId);
+                    if (Build.VERSION.SDK_INT >= 33) {
+                        String permission = "android.permission.POST_NOTIFICATIONS";
+                        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this, new String[]{permission}, 1);
+                        } else {
+                            startStepCounterService();
+                        }
+                    } else {
+                        startStepCounterService();
+                    }
+
+                    Toast.makeText(LoginActivity.this, "Logowanie udane!", Toast.LENGTH_SHORT).show();
+                    showInterstitialAd();
+
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Błąd: nie znaleziono ID użytkownika", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(LoginActivity.this, "Nieprawidłowe dane!", Toast.LENGTH_SHORT).show();
             }
@@ -85,6 +109,7 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "Wystąpił błąd podczas logowania", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void recoverPassword() {
         try {
@@ -174,6 +199,26 @@ public class LoginActivity extends BaseActivity {
         super.onResume();
         if (mInterstitialAd == null) {
             loadInterstitialAd();
+        }
+    }
+
+    private void startStepCounterService() {
+        Intent serviceIntent = new Intent(this, StepCounterService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent);
+        } else {
+            startService(serviceIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startStepCounterService();
+            } else {
+            }
         }
     }
 }

@@ -23,17 +23,22 @@ public class HomeActivity extends BaseActivity {
     private GridView gridView;
 
     // Dane dla kafelków
-    private String[] tileTitles = {"Listy", "Szablony", "Zmiana motywu", "Wyznacz trasę", "Archiwum", "Statystyki"};
+
+    private String[] tileTitles;
+
     private int[] tileIcons = {
-            android.R.drawable.ic_menu_agenda,       // ikona listy
-            android.R.drawable.ic_menu_edit,         // ikona szablonu
-            android.R.drawable.ic_menu_preferences,  // ikona motywu
-            android.R.drawable.ic_menu_directions,   // ikona trasy
+            android.R.drawable.ic_menu_agenda,      // treningi
+            android.R.drawable.ic_menu_directions,  // steps
+            android.R.drawable.ic_menu_camera,      // aparat
+            android.R.drawable.ic_menu_preferences,  // ustawienia
             android.R.drawable.ic_menu_edit,   // ikona archiwum
             android.R.drawable.ic_menu_preferences,
     };
     private Class<?>[] activities = {
-            SettingsActivity.class
+            CreateTrainingPlanActivity.class,
+            StepCounting.class,
+            CameraActivity.class,
+            SettingsActivity.class,
             // ListsActivity.class,
             // TemplatesActivity.class,
             // ThemeActivity.class,
@@ -47,16 +52,35 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        tileTitles = new String[] {
+                getString(R.string.treningi),
+                getString(R.string.steps),
+                getString(R.string.aparat),
+                getString(R.string.ustawienia),
+                "Wyznacz trasę",
+                "Archiwum",
+        };
+
+
         gridView = findViewById(R.id.gridView);
         gridView.setAdapter(new TileAdapter());
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                if (position < activities.length) {
+                    // Uruchom przypisaną aktywność
+                    Intent intent = new Intent(HomeActivity.this, activities[position]);
+                    startActivity(intent);
+                } else {
+                    // Ewentualnie pokaż komunikat dla kafelków bez aktywności
+                    // Toast.makeText(HomeActivity.this, "Funkcja w trakcie tworzenia", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
