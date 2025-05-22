@@ -23,8 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        // Przycisk zapisz/zamknij
+        
         Button saveButton = findViewById(R.id.save_button);
         saveButton.setOnClickListener(v -> {
             if (settingsChanged) {
