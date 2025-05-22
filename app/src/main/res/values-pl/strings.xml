@@ -18,6 +18,12 @@
     <string name="app_theme">Motyw aplikacji</string>
     <string name="dark_mode">Tryb ciemny</string>
     <string name="save_changes">Zapisz zmiany</string>
+    <string name="steps">Kroki</string>
+    <string name="stepsToday">Kroki dzisiaj: %1$d</string>
+    <string name="treningi">Treningi</string>
+    <string name="ustawienia">Ustawienia</string>
+    <string name="aparat">Aparat</string>
+    <string name="takeAPicture">Zrób zdjęcie</string>
 
     <string-array name="languages">
         <item>Polski</item>

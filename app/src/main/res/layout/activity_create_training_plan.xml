@@ -1,0 +1,54 @@
+<!-- res/layout/activity_create_training_plan.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etExerciseName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nazwa ćwiczenia"/>
+
+    <EditText
+        android:id="@+id/etSets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Serie"/>
+
+    <EditText
+        android:id="@+id/etReps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Powtórzenia"/>
+
+    <EditText
+        android:id="@+id/etMinutes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Minuty"/>
+
+    <EditText
+        android:id="@+id/etSeconds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Sekundy"/>
+
+    <Button
+        android:id="@+id/btnAddExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dodaj ćwiczenie"/>
+
+    <Button
+        android:id="@+id/btnSavePlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zapisz plan treningowy"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
