@@ -2,57 +2,70 @@ package com.example.zdrowiepp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
-        super(context, Constant.DATABASE_NAME, null, 1);
+        super(context, Constant.DATABASE_NAME, null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-            "CREATE TABLE " + Constant.TAB_USERS + " (" +
-                Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Constant.COL_EMAIL + " TEXT UNIQUE, " +
-                Constant.COL_PASSWORD + " TEXT" +
-            ");"
+                "CREATE TABLE " + Constant.TAB_USERS + " (" +
+                        Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        Constant.COL_EMAIL + " TEXT UNIQUE, " +
+                        Constant.COL_PASSWORD + " TEXT" +
+                        ");"
         );
 
         db.execSQL(
-            "CREATE TABLE " + Constant.TAB_TRAINING_PLAN + " (" +
-                Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Constant.COL_USER_ID + " INTEGER, " +
-                "FOREIGN KEY(" + Constant.COL_USER_ID + ") REFERENCES " + Constant.TAB_USERS +
-            ");"
+                "CREATE TABLE " + Constant.TAB_TRAINING_PLAN + " (" +
+                        Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        Constant.COL_USER_ID + " INTEGER, " +
+                        "FOREIGN KEY(" + Constant.COL_USER_ID + ") REFERENCES " + Constant.TAB_USERS +
+                        ");"
         );
 
         db.execSQL(
-            "CREATE TABLE " + Constant.TAB_EXERCISES + " (" +
-                Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Constant.COL_TRAINING_PLAN_ID + " INTEGER, " +
-                Constant.COL_NAME + " TEXT, " +
-                Constant.COL_SETS + " INTEGER, " +
-                Constant.COL_REPS + " INTEGER, " +
-                Constant.COL_MINUTES + " INTEGER, " +
-                Constant.COL_SECONDS + " INTEGER, " +
-                "FOREIGN KEY(" + Constant.COL_TRAINING_PLAN_ID + ") REFERENCES " + Constant.TAB_TRAINING_PLAN +
-            ");"
+                "CREATE TABLE " + Constant.TAB_EXERCISES + " (" +
+                        Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        Constant.COL_TRAINING_PLAN_ID + " INTEGER, " +
+                        Constant.COL_NAME + " TEXT, " +
+                        Constant.COL_SETS + " INTEGER, " +
+                        Constant.COL_REPS + " INTEGER, " +
+                        Constant.COL_MINUTES + " INTEGER, " +
+                        Constant.COL_SECONDS + " INTEGER, " +
+                        "FOREIGN KEY(" + Constant.COL_TRAINING_PLAN_ID + ") REFERENCES " + Constant.TAB_TRAINING_PLAN +
+                        ");"
         );
 
         db.execSQL(
-            "CREATE TABLE " + Constant.TAB_EXERCISES_HISTORY + " (" +
-                Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                Constant.COL_EXERCISE_ID + " INTEGER, " +
-                Constant.COL_DATE + " DATETIME, " +
-                Constant.COL_SETS + " INTEGER, " +
-                Constant.COL_HOURS + " INTEGER, " +
-                Constant.COL_MINUTES + " INTEGER, " +
-                "FOREIGN KEY(" + Constant.COL_EXERCISE_ID + ") REFERENCES " + Constant.TAB_EXERCISES +
-            ");"
+                "CREATE TABLE " + Constant.TAB_EXERCISES_HISTORY + " (" +
+                        Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        Constant.COL_EXERCISE_ID + " INTEGER, " +
+                        Constant.COL_DATE + " DATETIME, " +
+                        Constant.COL_SETS + " INTEGER, " +
+                        Constant.COL_HOURS + " INTEGER, " +
+                        Constant.COL_MINUTES + " INTEGER, " +
+                        "FOREIGN KEY(" + Constant.COL_EXERCISE_ID + ") REFERENCES " + Constant.TAB_EXERCISES +
+                        ");"
         );
 
+        db.execSQL(
+                "CREATE TABLE " + Constant.TAB_STEPS + " (" +
+                        Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        Constant.COL_USER_ID + " INTEGER, " +
+                        Constant.COL_COUNT + " INTEGER, " +
+                        Constant.COL_DATE + " DATETIME, " +
+                        "FOREIGN KEY(" + Constant.COL_USER_ID + ") REFERENCES " +
+                        Constant.TAB_USERS + "(" + Constant.COL_ID + ")" +
+                        ");"
+        );
+    }
+    /*
         db.execSQL(
             "CREATE TABLE " + Constant.TAB_STEPS + " (" +
                 Constant.COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -63,6 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ");"
         );
     }
+    */
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -86,9 +101,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean checkUser(String email, String password) {
         var cursor = getReadableDatabase().rawQuery(
-        "SELECT *" +
-            " FROM " + Constant.TAB_USERS +
-            " WHERE " + Constant.COL_EMAIL + "=? AND " + Constant.COL_PASSWORD + "=?", new String[] { email, password });
+                "SELECT *" +
+                        " FROM " + Constant.TAB_USERS +
+                        " WHERE " + Constant.COL_EMAIL + "=? AND " + Constant.COL_PASSWORD + "=?", new String[] { email, password });
 
         var exists = cursor.getCount() > 0;
         cursor.close();
@@ -98,9 +113,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String getPassword(String email) {
         var db = getReadableDatabase();
         var cursor = db.rawQuery(
-        "SELECT " + Constant.COL_PASSWORD +
-            " FROM " + Constant.TAB_USERS +
-            " WHERE " + Constant.COL_EMAIL + " = ?", new String[] { email });
+                "SELECT " + Constant.COL_PASSWORD +
+                        " FROM " + Constant.TAB_USERS +
+                        " WHERE " + Constant.COL_EMAIL + " = ?", new String[] { email });
 
         if (cursor.moveToFirst()) {
             var password = cursor.getString(0);
@@ -125,9 +140,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Exercise selectExercise(int id) {
         var cursor = getReadableDatabase().rawQuery(
-        "SELECT *" +
-            " FROM " + Constant.TAB_EXERCISES +
-            " WHERE " + Constant.COL_EXERCISE_ID + " = ?", new String[]{ Integer.toString(id) }
+                "SELECT *" +
+                        " FROM " + Constant.TAB_EXERCISES +
+                        " WHERE " + Constant.COL_EXERCISE_ID + " = ?", new String[]{ Integer.toString(id) }
         );
 
         if (!cursor.moveToFirst()) {
@@ -175,4 +190,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return new Exercise(id, trainingPlanId, name, minutes, seconds, sets, reps);
     }
+
+    public int getUserId(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + Constant.COL_ID + " FROM " + Constant.TAB_USERS + " WHERE " + Constant.COL_EMAIL + "=?", new String[]{email});
+
+        int userId = -1;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow(Constant.COL_ID));
+        }
+        cursor.close();
+        return userId;
+    }
+
 }
