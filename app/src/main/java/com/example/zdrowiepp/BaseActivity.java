@@ -14,7 +14,6 @@ import java.util.Locale;
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
-        // Aktualizacja języka
         SharedPreferences prefs = newBase.getSharedPreferences("settings_prefs", MODE_PRIVATE);
         String lang = prefs.getString("app_language", "en");
         super.attachBaseContext(updateLocale(newBase, lang));
@@ -22,7 +21,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Aktualizacja motywu
         SharedPreferences prefs = getSharedPreferences("settings_prefs", MODE_PRIVATE);
         int theme = prefs.getInt("app_theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         AppCompatDelegate.setDefaultNightMode(theme);

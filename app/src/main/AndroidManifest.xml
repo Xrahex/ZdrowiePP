@@ -5,14 +5,20 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -29,7 +35,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZdrowiePP">
         <activity
+            android:name=".GalleryActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".SharePdfActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartTrainingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExceriseAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".CreateExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateTrainingPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingPlanListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingPlansActivity"
             android:exported="false" />
 
         <service

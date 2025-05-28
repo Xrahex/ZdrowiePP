@@ -22,8 +22,6 @@ public class HomeActivity extends BaseActivity {
 
     private GridView gridView;
 
-    // Dane dla kafelków
-
     private String[] tileTitles;
 
     private int[] tileIcons = {
@@ -32,13 +30,15 @@ public class HomeActivity extends BaseActivity {
             android.R.drawable.ic_menu_camera,      // aparat
             android.R.drawable.ic_menu_preferences,  // ustawienia
             android.R.drawable.ic_menu_edit,   // ikona archiwum
-            android.R.drawable.ic_menu_preferences,
+            android.R.drawable.ic_menu_send
     };
     private Class<?>[] activities = {
-            CreateTrainingPlanActivity.class,
+            TrainingPlanActivity.class,
             StepCounting.class,
             CameraActivity.class,
             SettingsActivity.class,
+            ExerciseHistoryActivity.class,
+            SharePdfActivity.class
             // ListsActivity.class,
             // TemplatesActivity.class,
             // ThemeActivity.class,
@@ -57,8 +57,8 @@ public class HomeActivity extends BaseActivity {
                 getString(R.string.steps),
                 getString(R.string.aparat),
                 getString(R.string.ustawienia),
-                "Wyznacz trasę",
-                "Archiwum",
+                "Raport",
+                getString(R.string.share)
         };
 
 

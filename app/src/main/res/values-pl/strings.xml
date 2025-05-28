@@ -24,6 +24,29 @@
     <string name="ustawienia">Ustawienia</string>
     <string name="aparat">Aparat</string>
     <string name="takeAPicture">Zrób zdjęcie</string>
+    <string name="addPlan">Dodaj plan trenningowy</string>
+    <string name="exportTOPdf">Eksportuj do PDF</string>
+    <string name="done">Wykonane ćwiczenia w tym tygodniu</string>
+    <string name="exercise_name">Nazwa ćwiczenia</string>
+    <string name="exercise_details">Szczegóły</string>
+    <string name="delete_exercise_description">Usuń ćwiczenie</string>
+    <string name="exercise_name_hint">Nazwa ćwiczenia</string>
+    <string name="minutes_hint">Minuty</string>
+    <string name="seconds_hint">Sekundy</string>
+    <string name="sets_hint">Serie</string>
+    <string name="reps_hint">Powtórzenia</string>
+    <string name="save_exercise">Zapisz ćwiczenie</string>
+    <string name="take_photo">Zrób zdjęcie</string>
+    <string name="open_reports">Otwórz raporty</string>
+    <string name="progress_photo">Zdjęcie progresu</string>
+    <string name="plan_name_hint">Nazwa planu</string>
+    <string name="save_plan">Zapisz plan</string>
+    <string name="start_training">Rozpocznij trening</string>
+    <string name="add_exercise">Dodaj ćwiczenie</string>
+    <string name="exercises_in_plan">Ćwiczenia w planie:</string>
+    <string name="select_pdf_to_share">Wybierz plik PDF do udostępnienia</string>
+    <string name="end_training">Zakończ trening</string>
+    <string name="share">Udostępnij</string>
 
     <string-array name="languages">
         <item>Polski</item>

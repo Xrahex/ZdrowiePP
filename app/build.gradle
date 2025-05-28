@@ -42,7 +42,23 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation libs.room.common.jvm
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.9.0'
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    testImplementation 'androidx.test:core:1.5.0'
+    implementation 'com.itextpdf:itextg:5.5.10'
+// Jednostkowe testy
+    testImplementation 'junit:junit:4.13.2'
+
+// Robolectric
+    testImplementation 'org.robolectric:robolectric:4.10.3'
+
+// Mockito
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+
+// AndroidX Test Core (dla ShadowActivity itp.)
+    testImplementation 'androidx.test:core:1.5.0'
+
 }

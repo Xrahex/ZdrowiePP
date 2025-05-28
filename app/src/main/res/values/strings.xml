@@ -24,6 +24,29 @@
     <string name="aparat">Camera</string>
     <string name="ustawienia">Settings</string>
     <string name="takeAPicture">Take a picture</string>
+    <string name="addPlan">Add workout plan</string>
+    <string name="exportTOPdf">Export to PDF</string>
+    <string name="done">Exercises done this week</string>
+    <string name="exercise_name">Exercise name</string>
+    <string name="exercise_details">Details</string>
+    <string name="delete_exercise_description">Delete exercise</string>
+    <string name="exercise_name_hint">Exercise name</string>
+    <string name="minutes_hint">Minutes</string>
+    <string name="seconds_hint">Seconds</string>
+    <string name="sets_hint">Sets</string>
+    <string name="reps_hint">Reps</string>
+    <string name="save_exercise">Save exercise</string>
+    <string name="take_photo">Take photo</string>
+    <string name="open_reports">Open reports</string>
+    <string name="progress_photo">Progress photo</string>
+    <string name="plan_name_hint">Plan name</string>
+    <string name="save_plan">Save plan</string>
+    <string name="start_training">Start training</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="exercises_in_plan">Exercises in the plan:</string>
+    <string name="select_pdf_to_share">Select a PDF file to share</string>
+    <string name="end_training">End training</string>
+    <string name="share">Share</string>
 
     <string-array name="languages">
         <item>Polish</item>

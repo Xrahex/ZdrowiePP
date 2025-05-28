@@ -1,54 +1,49 @@
-<!-- res/layout/activity_create_training_plan.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="16dp"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/etExerciseName"
+        android:id="@+id/nameEditText"
+        android:hint="@string/plan_name_hint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nazwa ćwiczenia"/>
-
-    <EditText
-        android:id="@+id/etSets"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Serie"/>
-
-    <EditText
-        android:id="@+id/etReps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Powtórzenia"/>
-
-    <EditText
-        android:id="@+id/etMinutes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Minuty"/>
-
-    <EditText
-        android:id="@+id/etSeconds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Sekundy"/>
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnAddExercise"
+        android:id="@+id/saveButton"
+        android:text="@string/save_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dodaj ćwiczenie"/>
+        android:layout_marginTop="8dp"/>
 
     <Button
-        android:id="@+id/btnSavePlan"
+        android:id="@+id/startTraning"
+        android:text="@string/start_training"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zapisz plan treningowy"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/addExerciseButton"
+        android:text="@string/add_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:text="@string/exercises_in_plan"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/exercisesListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="1dp" />
 </LinearLayout>

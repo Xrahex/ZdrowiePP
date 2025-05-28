@@ -1,24 +1,69 @@
 package com.example.zdrowiepp;
 
-import java.util.HashMap;
+import android.content.Context;
 
-public final class TrainingPlan {
-    private final HashMap<Integer, Exercise> exercises = new HashMap<>();
+public class TrainingPlan {
+    private int id;
+    private String name;
+    private int userId;
 
-    public void setExercise(Exercise exercise) {
-        var id = exercise.getId();
-        if (id == 0) {
-            return;
-        }
-
-        exercises.put(id, exercise);
+    public TrainingPlan(int id, String name, int userId) {
+        this.id = id;
+        this.name = name;
+        this.userId = userId;
     }
 
-    public Exercise getExercise(int id) {
-        if (id == 0) {
-            return null;
+    public TrainingPlan(Context context, int id) {
+        try (DatabaseHelper db = new DatabaseHelper(context)) {
+            TrainingPlan tp = db.selectTrainingPlan(id);
+            if (tp != null) {
+                this.id = tp.id;
+                this.name = tp.name;
+                this.userId = tp.userId;
+            }
         }
+    }
 
-        return exercises.get(id);
+    public void saveTrainingPlan(Context context) {
+        try (DatabaseHelper db = new DatabaseHelper(context)) {
+            int newId = db.insertTrainingPlan(this);
+            this.id = newId;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public int fetchLatestId(Context context) {
+        try (DatabaseHelper db = new DatabaseHelper(context)) {
+            return db.getLastInsertedTrainingPlanId(userId);
+        }
+    }
+
+    // Gettery i settery
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

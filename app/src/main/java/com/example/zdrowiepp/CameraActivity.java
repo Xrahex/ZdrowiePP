@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +27,7 @@ public class CameraActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 100;
     private ImageView imageView;
     private Button btnTakePhoto;
+    private Button btnOpenGallery;
 
     private Uri photoUri;
 
@@ -40,6 +40,7 @@ public class CameraActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
+        btnOpenGallery = findViewById(R.id.btnOpenGallery);
 
         btnTakePhoto.setOnClickListener(v -> {
             if (checkCameraPermission()) {
@@ -49,10 +50,20 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+        btnOpenGallery.setOnClickListener(v -> {
+            Intent intent = new Intent(this, GalleryActivity.class);
+            startActivity(intent);
+        });
+
         takePictureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            ContentValues values = new ContentValues();
+                            values.put(MediaStore.Images.Media.IS_PENDING, 0);
+                            getContentResolver().update(photoUri, values, null, null);
+                        }
                         imageView.setImageURI(photoUri);
                         Toast.makeText(this, "Zdjęcie zapisane", Toast.LENGTH_SHORT).show();
                     } else {
@@ -67,8 +78,11 @@ public class CameraActivity extends AppCompatActivity {
 
     private void openCamera() {
         ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, generateFileName());
-        values.put(MediaStore.Images.Media.DESCRIPTION, "Zdjęcie progresu z aplikacji");
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, generateFileName() + ".jpg");
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/ZdrowiePP/Raporty");
+        }
 
         photoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
